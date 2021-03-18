@@ -1,4 +1,5 @@
 // https://leetcode.com/submissions/detail/465779999/?from=explore&item_id=776
+// This is good
 
 var threeSum = function(nums) {
     let solution = [];
