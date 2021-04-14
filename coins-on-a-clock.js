@@ -1,4 +1,4 @@
-
+// This is the clnoin clock
 // Given a string of coins return if we travesre clock 
 // and land at each vlaue of the string will we land on
 //  all uniqie spaces.
