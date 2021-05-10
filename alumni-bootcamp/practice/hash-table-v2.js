@@ -34,7 +34,8 @@ class HashTable {
 
 }
 
-let test = new HashTable(20);
+
+const test = new HashTable(20);
 test.insert("John", "John Value")
 test.insert("Son", "Son Value")
 test.insert("Marl", "Marl Value")
