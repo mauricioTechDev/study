@@ -31,3 +31,5 @@ var preorderTraversal = function(root) {
 	
 	return result;
 };
+
+// Check if there is a way to update this
