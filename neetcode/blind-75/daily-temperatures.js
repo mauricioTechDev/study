@@ -32,3 +32,18 @@ var dailyTemperatures = function(temperatures) {
     
     return ans
 };
+
+// Optimized var dailyTemperatures = function(temperatures) {
+    const stack = [];
+    for (let i = 0; i < temperatures.length; ++i) {
+        while (stack.length && temperatures[i] > temperatures[stack[stack.length - 1]]){
+            temperatures[stack[stack.length - 1]] = i - stack.pop(); 
+        }
+        stack.push(i);
+    }
+    
+    while (stack.length){
+     temperatures[stack.pop()] = 0;   
+    }
+    return temperatures;
+};
