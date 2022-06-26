@@ -107,6 +107,27 @@ class LinkedList {
 
         return this.#head;
     }
+    
+     merge(l1, l2){
+        let sentinel = new Node(0);
+        let head = sentinel;
+    
+        while (l1 && l2) {
+            head.next = new Node(0);
+            if (l1.val < l2.val){
+                head.next.val = l1.val
+                l1 = l1.next;   
+            } else {
+                head.next.val = l2.val
+                l2 = l2.next;
+            }
+            head = head.next;
+        }
+    
+        head.next = l1 || l2;
+    
+        return sentinel.next;
+    }
 }
 
 const newLinkedList = new LinkedList()
