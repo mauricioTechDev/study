@@ -128,6 +128,16 @@ class LinkedList {
     
         return sentinel.next;
     }
+    
+     deleteLast(){
+        let curr = this.#head;
+
+        while(curr.next.next !== null){
+            curr = curr.next;
+        }
+
+        curr.next = null
+    }
 }
 
 const newLinkedList = new LinkedList()
@@ -140,8 +150,4 @@ newLinkedList.push(66666)
 newLinkedList.addNodeAtPoint(1, 777)
 newLinkedList.addNodeAtPoint(2, 33333)
 
-console.log(newLinkedList.head);
-newLinkedList.reverse()
-console.log(newLinkedList.head);
-newLinkedList.reverse()
 console.log(newLinkedList.head);
