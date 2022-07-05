@@ -14,13 +14,17 @@ https://leetcode.com/problems/same-tree/
  * @return {boolean}
  */
 var isSameTree = function(p, q) {
-  if(p == null && q == null){
+    if(p === null && q === null){
         return true;
-    } else if (p == null || q == null){
-        return false;
-    } else if (p.val !== q.val){
-        return false;
-    } else {
-        return isSameTree(p.left, q.left) && isSameTree(p.right, q.right)
     }
+    if(p === null || q === null){
+        return false;
+    }
+    if(p.val !== q.val){
+        return false;
+    }  
+    
+    let same = isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+    
+    return same;
 };
