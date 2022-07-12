@@ -1,9 +1,12 @@
-
+class TrieNode{
+    constructor(){
+        this.children = {},
+        this.endOfWord = false
+    }
+}
 
 var Trie = function() {
-    this.key = null;
-    this.children = {};
-    this.end = false;
+    this.root = new TrieNode()
 };
 
 /** 
@@ -11,46 +14,15 @@ var Trie = function() {
  * @return {void}
  */
 Trie.prototype.insert = function(word) {
-    if(this.key === null){
-        let arr = word.split('');
-
-        const dfs = (ltrs, children) => {
-            let ltrsLength = ltrs.length;
-            let count = 0
-            let letter = ltrs.shift();
-            let curr = children
-            while(curr[letter]){
-                curr = curr[letter].children
-                count+=1
-                letter = ltrs.shift();
-            }
-            while(count <= ltrsLength){
-                    let subletter = ltrs.shift();
-                    count+=1;
-                    if(count === ltrsLength){
-                        curr[letter] = {
-                            key: null,
-                            children: {},
-                            end: true
-                        }
-                    } else if (count < ltrsLength) {
-                        curr[letter] = {
-                            key: subletter,
-                            children: {},
-                            end: false
-                        }
-                    }
-                    curr = curr[letter]?.children;
-                    letter = subletter;
-            }
-
-            if(count === ltrsLength) return null
-        }
-        dfs(arr, this.children)
-    } else {
-        thi.key = word
-    }
+    let curr = this.root;
     
+    for(const letter of word){
+        if(!curr.children[letter]){
+            curr.children[letter] = new TrieNode()
+        }
+        curr = curr.children[letter]
+    }
+    curr.endOfWord = true;
 };
 
 /** 
@@ -58,7 +30,15 @@ Trie.prototype.insert = function(word) {
  * @return {boolean}
  */
 Trie.prototype.search = function(word) {
+    let curr = this.root;
     
+    for(const letter of word){
+        if(curr.children[letter] === undefined){
+            return false
+        }
+        curr = curr.children[letter]
+    }
+    return curr.endOfWord;
 };
 
 /** 
@@ -66,7 +46,15 @@ Trie.prototype.search = function(word) {
  * @return {boolean}
  */
 Trie.prototype.startsWith = function(prefix) {
+    let curr = this.root;
     
+    for(const letter of prefix){
+        if(curr.children[letter] === undefined){
+            return false
+        }
+        curr = curr.children[letter]
+    }
+    return true
 };
 
 /** 
