@@ -48,7 +48,7 @@ WordDictionary.prototype.search = function(word) {
                 }
                 return false
             } else {
-//                 recusive part
+//                 iterative part
                 if(!curr.children[letter]){
                     return false
                 }
