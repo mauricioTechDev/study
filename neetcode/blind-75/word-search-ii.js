@@ -4,8 +4,7 @@ https://leetcode.com/problems/word-search-ii/
  * @param {string[]} words
  * @return {string[]}
  */
-
- class TrieNode{
+class TrieNode{
     constructor(){
         this.children = {},
         this.lastNode = false
@@ -13,64 +12,64 @@ https://leetcode.com/problems/word-search-ii/
 }
 
 class Trie{
-    constructor(root){
-        this.root = root
+    constructor(node){
+        this.root = node
     }
     
     addWord(word){
-        let curr = this.root
-        curr.refs += 1
+        let curr = this.root;
+        
         for(const letter of word){
             if(!curr.children[letter]){
                 curr.children[letter] = new TrieNode()
             }
-            curr = curr.children[letter]
+            curr = curr.children[letter];
         }
         curr.lastNode = true
     }
 }
 
+
 var findWords = function(board, words) {
-    let trie = new Trie(new TrieNode);
+    let trie = new Trie(new TrieNode());
     
     for(const word of words){
         trie.addWord(word);
     }
     
-    let rows = board.length;
+    let row = board.length;
     let col = board[0].length;
-    let res = new Set();
-    let visit = new Set();
+    let ans = new Set();
+    let visitedIndexes = new Set();
     
     const dfs = (r, c, node, word) => {
         if(
             r < 0 || c < 0 ||
-            r >= rows || c >= col ||
-            !node.children[board[r][c]] ||
-            visit.has(`${r},${c}`)
+            r >= row || c >= col ||
+            visitedIndexes.has(`${r},${c}`) ||
+            !node.children[board[r][c]]
         ){
             return;
         }
         
-        visit.add(`${r},${c}`);
-        node = node.children[board[r][c]]
-        word += board[r][c]
+        visitedIndexes.add(`${r},${c}`);
+        word += board[r][c];
+        node = node.children[board[r][c]];
         if(node.lastNode){
-            res.add(word);
+            ans.add(word)
         }
         
-        dfs(r, c + 1, node, word) 
-        dfs(r, c - 1, node, word) 
-        dfs(r + 1, c, node, word) 
-        dfs(r - 1, c, node, word)         
-        visit.delete(`${r},${c}`);
+        dfs(r, c + 1, node, word)
+        dfs(r, c - 1,node, word)
+        dfs(r +1,c , node, word)
+        dfs(r-1,c, node, word)
+        visitedIndexes.delete(`${r},${c}`);
     }
     
-    for(let i = 0; i < rows; i+=1){
-        for(let j = 0; j < col; j+=1){
-            dfs(i, j, trie.root, '')
+    for(let r = 0; r < row; r+=1){
+        for(let c = 0; c < col; c+=1){
+            dfs(r, c, trie.root, '')
         }
     }
-    
-    return [...res]
+    return [...ans]
 };
