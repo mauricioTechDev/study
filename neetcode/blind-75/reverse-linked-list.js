@@ -14,16 +14,14 @@ https://leetcode.com/problems/reverse-linked-list/
 var reverseList = function(head) {
     let prev = null;
     let curr = head;
-    let nextVal = null
+    let placeholder = null
     
-    while(curr !== null){
-        nextVal = curr.next
-        curr.next = prev
-        prev = curr
-        curr = nextVal
+    while(curr){
+        placeholder = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = placeholder;
     }
     
-    return prev
-
-}
-
+    return prev;
+};
