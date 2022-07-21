@@ -2,6 +2,10 @@
 // Enqueue -> insert element into the queue
 // Dequeue -> remove element from the the queue in the same order they where inserted(FIFO)  
 
+// Essential operations:
+// Enqueue -> insert element into the queue
+// Dequeue -> remove element from the the queue in the same order they where inserted(FIFO)  
+
 class Heap {
     constructor(comparator = (a, b) => a - b) {
       this.array = [];
@@ -40,11 +44,14 @@ class Heap {
      */
     remove(index = 0){
         if(this.size === 0) return null;
-        
+        this.swap(index, this.size - 1); // swap with last
+        const value = this.array.pop(); // remove element
+        this.bubbleDown(index);
+        return value;
+
     }
 
 
-  
     /**
      * Move new element upwards on the Heap, if it's out of order
      * @runtime O(log n)
@@ -61,6 +68,23 @@ class Heap {
       }
     }
 
+    /**
+   * After removal, moves element downwards on the heap, if it's out of order
+   * @runtime O(log n)
+   */
+  bubbleDown(index = 0) {
+    let curr = index;
+    const left = (i) => 2 * i + 1;
+    const right = (i) => 2 * i + 2;
+    const getTopChild = (i) => (right(i) < this.size && this.comparator(left(i), right(i)) > 0 ? right(i) : left(i));
+
+    while (left(curr) < this.size && this.comparator(curr, getTopChild(curr)) > 0) {
+      const next = getTopChild(curr);
+      this.swap(curr, next);
+      curr = next;
+    }
+  }
+
         /**
      * Swap elements on the heap
      * @runtime O(1)
@@ -72,6 +96,7 @@ class Heap {
     }
 
   }
+
 
   let test = new Heap()
 
