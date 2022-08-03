@@ -6,7 +6,9 @@ function bonAppetit(bill, k, b) {
     for(let i = 0; i < bill.length; i++){
             sum += bill[i];
     }
+
     let diff = (sum - bill[k])/2;
+
     if(diff === b){
         console.log('Bon Appetit')      
     } else {
