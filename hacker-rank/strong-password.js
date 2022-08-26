@@ -9,6 +9,15 @@ https://www.hackerrank.com/contests/hourrank-24/challenges/strong-password/probl
  *  2. STRING password
  */
 
+/*
+ * Complete the 'minimumNumber' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts following parameters:
+ *  1. INTEGER n
+ *  2. STRING password
+ */
+
 function minimumNumber(n, password) {
     if(n == 3) return 3
     if(n == 2) return 4
@@ -69,9 +78,19 @@ function minimumNumber(n, password) {
     }
     // console.log({mem, charachersAdded, password, numObj, lowerObj, upperObj, specialObj})
     if(password.length === 5){
-        return 4 - charachersAdded + 1
+        if((4 - charachersAdded) + 4 >= 6 || (4 - charachersAdded) + 5 >= 6){
+            return 4 - charachersAdded    
+        } else {
+            return 4 - charachersAdded + 1
+        }
     } else if (password.length === 4) {
-        return 4 - charachersAdded + 2
+        if((4 - charachersAdded) + 4 >= 6){
+            return 4 - charachersAdded
+        } else if ((4 - charachersAdded) + 4 + 1 >= 6) {
+            return 4 - charachersAdded + 1
+        } else {
+            return 4 - charachersAdded + 2
+        }
     } else {
         return 4 - charachersAdded;   
     }
